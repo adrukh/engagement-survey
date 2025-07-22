@@ -24,6 +24,7 @@ export interface Survey {
   values: Value[];
   questions: Question[];
   isActive: boolean;
+  expectedResponses?: number;
 }
 
 export interface QuestionScore {
@@ -43,6 +44,8 @@ export interface ValueScore {
 
 export interface SurveyResults {
   totalResponses: number;
+  expectedResponses?: number;
+  responseRate?: number;
   valueScores: ValueScore[];
   overallScore: number;
 }

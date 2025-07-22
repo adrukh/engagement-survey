@@ -11,123 +11,97 @@ export const questions: Question[] = [
   {
     id: 'col2',
     valueId: 'collaboration',
-    text: 'I receive recognition when I help others succeed',
+    text: 'Our team communicates openly and effectively',
     order: 2
   },
   {
     id: 'col3',
     valueId: 'collaboration',
-    text: 'Our team communicates openly and effectively',
+    text: 'I feel comfortable asking questions when I need clarification',
     order: 3
   },
   {
     id: 'col4',
     valueId: 'collaboration',
-    text: 'I feel comfortable asking questions when I need clarification',
+    text: 'We work well together to solve complex problems',
     order: 4
   },
 
-  // Customer Focus & Delivery
+  // Customer Focus
   {
     id: 'cus1',
     valueId: 'customer-focus',
-    text: 'In our work, done is better than perfect',
+    text: 'Our team prioritizes customer needs in decision-making',
     order: 5
   },
   {
     id: 'cus2',
     valueId: 'customer-focus',
-    text: 'We value small increments over large projects',
+    text: 'I understand how my work contributes to customer success',
     order: 6
   },
   {
     id: 'cus3',
     valueId: 'customer-focus',
-    text: 'Our team prioritizes customer needs in decision-making',
+    text: 'We regularly seek and act on customer feedback',
     order: 7
   },
   {
     id: 'cus4',
     valueId: 'customer-focus',
-    text: 'I understand how my work contributes to customer success',
+    text: 'Customer satisfaction is a key measure of our success',
     order: 8
   },
 
-  // Growth & Learning
+  // Technical Innovation
   {
-    id: 'gro1',
-    valueId: 'growth',
-    text: 'I have opportunities to learn new skills at work',
+    id: 'inn1',
+    valueId: 'innovation',
+    text: 'I am encouraged to explore new technologies and approaches',
     order: 9
   },
   {
-    id: 'gro2',
-    valueId: 'growth',
-    text: 'My manager supports my professional development',
+    id: 'inn2',
+    valueId: 'innovation',
+    text: 'We have time allocated for experimentation and learning',
     order: 10
   },
   {
-    id: 'gro3',
-    valueId: 'growth',
-    text: 'We learn from mistakes rather than blame',
+    id: 'inn3',
+    valueId: 'innovation',
+    text: 'Creative problem-solving is valued in our organization',
     order: 11
   },
   {
-    id: 'gro4',
-    valueId: 'growth',
-    text: 'I feel challenged and engaged in my current role',
+    id: 'inn4',
+    valueId: 'innovation',
+    text: 'We stay current with industry trends and best practices',
     order: 12
   },
 
-  // Transparency & Trust
+  // Feedback & Recognition
   {
-    id: 'tra1',
-    valueId: 'transparency',
-    text: 'Leadership shares important information openly with the team',
+    id: 'fee1',
+    valueId: 'feedback',
+    text: 'I receive regular, constructive feedback on my performance',
     order: 13
   },
   {
-    id: 'tra2',
-    valueId: 'transparency',
-    text: 'I trust my manager to support me when needed',
+    id: 'fee2',
+    valueId: 'feedback',
+    text: 'Good work and achievements are recognized and celebrated',
     order: 14
   },
   {
-    id: 'tra3',
-    valueId: 'transparency',
-    text: 'Our team discusses problems constructively',
+    id: 'fee3',
+    valueId: 'feedback',
+    text: 'I feel comfortable giving feedback to my colleagues and manager',
     order: 15
   },
   {
-    id: 'tra4',
-    valueId: 'transparency',
-    text: 'I feel safe expressing my honest opinions at work',
-    order: 16
-  },
-
-  // Work-Life Balance & Well-being
-  {
-    id: 'wel1',
-    valueId: 'wellbeing',
-    text: 'I can maintain a healthy balance between work and personal life',
-    order: 17
-  },
-  {
-    id: 'wel2',
-    valueId: 'wellbeing',
-    text: 'My workload is manageable and realistic',
-    order: 18
-  },
-  {
-    id: 'wel3',
-    valueId: 'wellbeing',
-    text: 'The company cares about employee well-being',
-    order: 19
-  },
-  {
-    id: 'wel4',
-    valueId: 'wellbeing',
+    id: 'fee4',
+    valueId: 'feedback',
     text: 'I would recommend my friends to work at this company',
-    order: 20
+    order: 16
   }
 ];

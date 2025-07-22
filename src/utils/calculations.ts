@@ -54,7 +54,8 @@ export function calculateValueScore(valueId: string, questions: Question[], resp
 export function calculateSurveyResults(
   values: Value[],
   questions: Question[],
-  responses: Response[]
+  responses: Response[],
+  expectedResponses?: number
 ): SurveyResults {
   const valueScores = values.map(value => {
     const valueScore = calculateValueScore(value.id, questions, responses);
@@ -69,9 +70,15 @@ export function calculateSurveyResults(
   const overallScore = valueScores.length > 0
     ? Math.round(valueScores.reduce((sum, vs) => sum + vs.score, 0) / valueScores.length)
     : 0;
+
+  const responseRate = expectedResponses && expectedResponses > 0
+    ? Math.round((totalResponses / expectedResponses) * 100)
+    : undefined;
   
   return {
     totalResponses,
+    expectedResponses,
+    responseRate,
     valueScores,
     overallScore
   };

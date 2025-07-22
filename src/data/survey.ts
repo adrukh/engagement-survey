@@ -8,5 +8,6 @@ export const survey: Survey = {
   description: 'A demonstration of how engagement surveys work. This survey measures how well our core values are reflected in day-to-day work.',
   values,
   questions,
-  isActive: true
+  isActive: true,
+  expectedResponses: 45
 };

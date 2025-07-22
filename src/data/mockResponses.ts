@@ -1,37 +1,32 @@
 import type { Response } from '../types';
 
 // Generate realistic mock responses for 25 participants
-// Distribution roughly: 10% score 1-2, 30% score 3, 60% score 4-5
+// Target support levels with variance: Collaboration 87%, Customer Focus 74%, Tech Innovation 65%, Feedback 55%
+// One question in each group scores ~20% lower than group average
 export const mockResponses: Response[] = [
-  // Collaboration questions (generally strong)
-  ...generateResponses('col1', 25, [0.05, 0.05, 0.20, 0.40, 0.30]),
-  ...generateResponses('col2', 25, [0.08, 0.12, 0.25, 0.35, 0.20]),
-  ...generateResponses('col3', 25, [0.04, 0.08, 0.28, 0.40, 0.20]),
-  ...generateResponses('col4', 25, [0.04, 0.04, 0.22, 0.45, 0.25]),
+  // Collaboration questions (87% average - very strong)
+  ...generateResponses('col1', 25, [0.00, 0.04, 0.06, 0.48, 0.42]), // ~90%
+  ...generateResponses('col2', 25, [0.00, 0.04, 0.08, 0.46, 0.42]), // ~88% 
+  ...generateResponses('col3', 25, [0.00, 0.04, 0.10, 0.44, 0.42]), // ~86%
+  ...generateResponses('col4', 25, [0.12, 0.16, 0.17, 0.35, 0.20]), // ~55% (low outlier)
 
-  // Customer focus (mixed results)
-  ...generateResponses('cus1', 25, [0.12, 0.16, 0.32, 0.28, 0.12]),
-  ...generateResponses('cus2', 25, [0.08, 0.12, 0.40, 0.28, 0.12]),
-  ...generateResponses('cus3', 25, [0.04, 0.08, 0.28, 0.35, 0.25]),
-  ...generateResponses('cus4', 25, [0.08, 0.08, 0.24, 0.40, 0.20]),
+  // Customer focus (74% average - strong performance)
+  ...generateResponses('cus1', 25, [0.04, 0.08, 0.12, 0.44, 0.32]), // ~76%
+  ...generateResponses('cus2', 25, [0.08, 0.04, 0.12, 0.46, 0.30]), // ~76%
+  ...generateResponses('cus3', 25, [0.04, 0.08, 0.16, 0.42, 0.30]), // ~72%
+  ...generateResponses('cus4', 25, [0.20, 0.16, 0.18, 0.32, 0.14]), // ~46% (low outlier)
 
-  // Growth (room for improvement)
-  ...generateResponses('gro1', 25, [0.16, 0.20, 0.32, 0.24, 0.08]),
-  ...generateResponses('gro2', 25, [0.12, 0.16, 0.36, 0.28, 0.08]),
-  ...generateResponses('gro3', 25, [0.08, 0.12, 0.35, 0.30, 0.15]),
-  ...generateResponses('gro4', 25, [0.20, 0.16, 0.28, 0.24, 0.12]),
+  // Technical Innovation (65% average - moderate)
+  ...generateResponses('inn1', 25, [0.08, 0.12, 0.12, 0.40, 0.28]), // ~68%
+  ...generateResponses('inn2', 25, [0.08, 0.12, 0.16, 0.38, 0.26]), // ~64%
+  ...generateResponses('inn3', 25, [0.12, 0.08, 0.16, 0.40, 0.24]), // ~64%
+  ...generateResponses('inn4', 25, [0.24, 0.20, 0.20, 0.28, 0.08]), // ~36% (low outlier)
 
-  // Transparency (strong)
-  ...generateResponses('tra1', 25, [0.04, 0.08, 0.20, 0.38, 0.30]),
-  ...generateResponses('tra2', 25, [0.08, 0.08, 0.24, 0.35, 0.25]),
-  ...generateResponses('tra3', 25, [0.04, 0.12, 0.24, 0.40, 0.20]),
-  ...generateResponses('tra4', 25, [0.12, 0.08, 0.20, 0.35, 0.25]),
-
-  // Well-being (needs attention)
-  ...generateResponses('wel1', 25, [0.24, 0.20, 0.28, 0.20, 0.08]),
-  ...generateResponses('wel2', 25, [0.20, 0.24, 0.32, 0.16, 0.08]),
-  ...generateResponses('wel3', 25, [0.16, 0.20, 0.36, 0.20, 0.08]),
-  ...generateResponses('wel4', 25, [0.28, 0.16, 0.28, 0.20, 0.08]) // eNPS question
+  // Feedback & Recognition (55% average - needs improvement)
+  ...generateResponses('fee1', 25, [0.16, 0.12, 0.14, 0.36, 0.22]), // ~58%
+  ...generateResponses('fee2', 25, [0.12, 0.16, 0.16, 0.34, 0.22]), // ~56%
+  ...generateResponses('fee3', 25, [0.16, 0.12, 0.18, 0.36, 0.18]), // ~54%
+  ...generateResponses('fee4', 25, [0.28, 0.20, 0.20, 0.24, 0.08]), // ~32% (low outlier - eNPS)
 ];
 
 function generateResponses(questionId: string, count: number, distribution: number[]): Response[] {

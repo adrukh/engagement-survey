@@ -8,22 +8,17 @@ export const values: Value[] = [
   },
   {
     id: 'customer-focus',
-    name: 'Customer Focus & Delivery',
-    description: 'Delivering value to customers efficiently'
+    name: 'Customer Focus',
+    description: 'Prioritizing customer needs and delivering exceptional value'
   },
   {
-    id: 'growth',
-    name: 'Growth & Learning',
-    description: 'Continuous improvement and development'
+    id: 'innovation',
+    name: 'Technical Innovation',
+    description: 'Embracing new technologies and creative problem-solving'
   },
   {
-    id: 'transparency',
-    name: 'Transparency & Trust',
-    description: 'Open communication and honest relationships'
-  },
-  {
-    id: 'wellbeing',
-    name: 'Work-Life Balance & Well-being',
-    description: 'Supporting sustainable performance and personal health'
+    id: 'feedback',
+    name: 'Feedback & Recognition',
+    description: 'Giving and receiving constructive feedback while celebrating achievements'
   }
 ];

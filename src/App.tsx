@@ -48,7 +48,8 @@ function App() {
   const results: SurveyResults = calculateSurveyResults(
     survey.values,
     survey.questions,
-    allResponses
+    allResponses,
+    survey.expectedResponses
   );
 
   return (

@@ -7,7 +7,7 @@ interface ResultsDashboardProps {
 }
 
 export function ResultsDashboard({ results, onBack, onReset }: ResultsDashboardProps) {
-  const { valueScores, totalResponses, overallScore } = results;
+  const { valueScores, totalResponses, expectedResponses, responseRate, overallScore } = results;
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600 bg-green-50 border-green-200';
@@ -22,27 +22,9 @@ export function ResultsDashboard({ results, onBack, onReset }: ResultsDashboardP
   };
 
   const sortedValues = [...valueScores].sort((a, b) => b.score - a.score);
-  const topValues = sortedValues.slice(0, 3);
-  const bottomValues = sortedValues.slice(-3).reverse();
+  const topValues = sortedValues.slice(0, 2);
+  const bottomValues = sortedValues.slice(-2).reverse();
 
-  const exportResults = () => {
-    const csvContent = [
-      'Value,Score,Question,Question Score,Total Responses',
-      ...valueScores.flatMap(value =>
-        value.questionScores.map(q =>
-          `"${value.valueName}",${value.score},"${q.questionText}",${q.score},${q.totalResponses}`
-        )
-      )
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'engagement-survey-results.csv';
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
 
   return (
     <div className="max-w-6xl mx-auto p-6 py-8">
@@ -57,20 +39,30 @@ export function ResultsDashboard({ results, onBack, onReset }: ResultsDashboardP
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Survey Results</h1>
-              <p className="text-gray-600">{totalResponses} responses collected</p>
+              <div className="flex items-center space-x-4 mt-1">
+                <p className="text-gray-600">{totalResponses} responses collected</p>
+                {expectedResponses && responseRate && (
+                  <>
+                    <span className="text-gray-400">•</span>
+                    <div className="flex items-center space-x-2">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        responseRate >= 70 ? 'bg-green-100 text-green-800' :
+                        responseRate >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {responseRate}% participation
+                      </span>
+                      <span className="text-gray-500 text-sm">
+                        ({totalResponses} of {expectedResponses} invited)
+                      </span>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
-          <button
-            onClick={exportResults}
-            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-md hover:shadow-lg"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            <span>Export CSV</span>
-          </button>
           {onReset && (
             <button
               onClick={onReset}
@@ -94,19 +86,42 @@ export function ResultsDashboard({ results, onBack, onReset }: ResultsDashboardP
         </div>
       </div>
 
-      {/* Overall Score */}
-      <div className={`rounded-2xl border-2 p-8 mb-10 shadow-lg ${getScoreColor(overallScore)}`}>
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-80 rounded-full mb-6">
-            <div className="text-4xl font-bold text-gray-900">{overallScore}%</div>
-          </div>
-          <div className="text-2xl font-bold mb-3">Overall Engagement Score</div>
-          <div className="text-lg font-medium max-w-md mx-auto">
-            {overallScore >= 80 ? '🎉 Excellent engagement levels across the organization' :
-             overallScore >= 60 ? '👍 Good engagement with opportunities for improvement' :
-             '⚠️ Significant engagement challenges that need attention'}
+      {/* Key Metrics */}
+      <div className="grid md:grid-cols-2 gap-6 mb-10">
+        {/* Overall Score */}
+        <div className={`rounded-2xl border-2 p-8 shadow-lg ${getScoreColor(overallScore)}`}>
+          <div className="text-center">
+            <div className="text-4xl font-bold mb-3">{overallScore}%</div>
+            <div className="text-xl font-bold mb-2">Overall Engagement Score</div>
+            <div className="text-sm font-medium">
+              {overallScore >= 80 ? '🎉 Excellent engagement levels' :
+               overallScore >= 60 ? '👍 Good engagement' :
+               '⚠️ Needs attention'}
+            </div>
           </div>
         </div>
+
+        {/* Response Rate */}
+        {expectedResponses && responseRate && (
+          <div className={`rounded-2xl border-2 p-8 shadow-lg ${
+            responseRate >= 70 ? 'text-green-600 bg-green-50 border-green-200' :
+            responseRate >= 50 ? 'text-yellow-600 bg-yellow-50 border-yellow-200' :
+            'text-red-600 bg-red-50 border-red-200'
+          }`}>
+            <div className="text-center">
+              <div className="text-4xl font-bold mb-3">{responseRate}%</div>
+              <div className="text-xl font-bold mb-2">Response Rate</div>
+              <div className="text-sm font-medium">
+                {totalResponses} of {expectedResponses} people responded
+              </div>
+              <div className="text-xs mt-2 opacity-75">
+                {responseRate >= 70 ? '✅ Great participation' :
+                 responseRate >= 50 ? '⚠️ Moderate participation' :
+                 '❌ Low participation - results may not be representative'}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Value Scores */}
