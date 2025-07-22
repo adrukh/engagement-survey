@@ -44,17 +44,6 @@ export function SurveyForm({ questions, onComplete, onBack }: SurveyFormProps) {
     }, 600);
   };
 
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex < randomizedQuestions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
 
   const handleSubmit = () => {
     if (responses.length === randomizedQuestions.length) {
@@ -73,7 +62,6 @@ export function SurveyForm({ questions, onComplete, onBack }: SurveyFormProps) {
   };
 
   const isComplete = responses.length === randomizedQuestions.length;
-  const canProceed = currentResponse !== undefined;
 
   if (isSubmitting) {
     return (
