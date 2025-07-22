@@ -53,7 +53,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
       <ViewTransition viewKey={currentView}>
         {currentView === 'overview' && (
           <SurveyOverview
@@ -79,6 +79,17 @@ function App() {
           />
         )}
       </ViewTransition>
+      
+      <footer className="mt-auto py-4 text-center text-sm text-gray-600 bg-white/50">
+        <a 
+          href="https://github.com/adrukh/engagement-survey" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hover:text-blue-600 transition-colors"
+        >
+          View source code on GitHub
+        </a>
+      </footer>
     </div>
   );
 }
